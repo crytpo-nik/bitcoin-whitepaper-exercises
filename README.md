@@ -1,4 +1,4 @@
-# Bitcoin Whitepaper Exercises 
+# Bitcoin Whitepaper Exercises - first change here
 
 In these exercises, you will not learn about blockchains from the perspective of the [original Bitcoin Whitepaper](https://bitcoin.org/en/bitcoin-paper).
 
