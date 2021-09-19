@@ -59,10 +59,10 @@ function blockHash(bl) {
 }
 // verify each block ( exept block 0)
 function verifyblock (blo) {
-	if (blo.data != '' 
+	if (blo.data != null 
 	&& Number.isInteger(blo.index) 
 	&& blo.index >= 0 
-	&& blo.prevHash !=  '' 
+	&& blo.prevHash !=  null 
 	&& blo.hash == blockHash(blo)) {
 		return true
 	}
@@ -73,11 +73,10 @@ function verifyblock (blo) {
 
 // verify block 0
 function verifyblock0 (blo) {
-	if (blo.data != '' 
+	if (blo.data != null
 	&& Number.isInteger(blo.index) 
-	&& blo.index >= 0 
-	&& blo.prevHash !=  '' 
-	&& blo.hash == blockHash(blo)) {
+	&& blo.index == 0 
+	&& blo.hash == "000000") {
 		return true
 	}
 	else {
@@ -85,18 +84,22 @@ function verifyblock0 (blo) {
 	}
 }
 
-function verifyChain(bloc){
-	for ( let i = 1 ; i < Blockchain.blocks.length - 1 ; i++){
-		let response = true
-		if (response == false) { break; }
+function verifyChain(bloc){let response = true
+
+	for ( let i = 0 ; i < bloc.blocks.length - 1 ; i++){
+		
+		
 		if (i == 0 ){response = verifyblock0(bloc.blocks[i])
 			
-
 		}
-		else {response = verifyblock(bloc.blocks[i])
-
+		else {
+			if (verifyblock(bloc.blocks[i]) == true && bloc.blocks[i].prevHash == bloc.blocks[i-1].hash){
+			response = true}
+			else { response = false}
 		}
+		if (response == false) { break; }
 		return response 
+	
 	}
 
 }
